@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {createTodo} from './actions'
+import { addTodoRequest } from './thunks';
 import {connect} from 'react-redux' //connect is a higher order function -> 2 diff sets of arguments : connect()(componentToConnectToReduxStore)
 import "./NewToDoForm.css"
 
@@ -36,7 +36,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    onCreatePressed: text => dispatch(createTodo(text)),
+    onCreatePressed: text => dispatch(addTodoRequest(text)),
 });
 
 // exporting the connected version of this component

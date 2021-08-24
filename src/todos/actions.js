@@ -1,21 +1,21 @@
 // ACTION CREATOR - extracted the actual code for the action
 export const CREATE_TODO = 'CREATE_TODO';
 // Action creator:
-export const createTodo = text => ({
+export const createTodo = todo => ({
     type: CREATE_TODO,
-    payload: { text },
+    payload: { todo },
 });
 
 export const REMOVE_TODO = 'REMOVE_TODO';
-export const removeTodo = text => ({
+export const removeTodo = todo => ({
     type: REMOVE_TODO,
-    payload: { text },
+    payload: { todo },
 });
 
 export const COMPLETED_TODO = 'COMPLETED_TODO'
-export const completedTodo = text => ({
+export const completedTodo = todo => ({
     type: COMPLETED_TODO,
-    payload: { text },
+    payload: { todo },
 });
 
 export const LOAD_TODOS_IN_PROGRESS = 'LOAD_TODOS_IN_PROGRESS';
