@@ -4,6 +4,7 @@ import { completedTodo} from './actions'
 import {displayAlert} from './thunks'
 import { loadTodos, removeTodoRequest, markTodoAsCompletedRequest } from './thunks';
 import ToDoListItem from './ToDoListItem'
+import { getTodos, getTodosLoading } from './selectors';
 import NewToDoForm from './NewToDoForm'
 import "./ToDoList.css"
 
@@ -37,8 +38,8 @@ const ToDoList = ({ todos = [], onRemovePressed, onCompletePressed, isLoading, s
 // )
 
 const mapStateToProps = state => ({
-    isLoading: state.isLoading,
-    todos: state.todos,
+    isLoading: getTodosLoading(state),
+    todos: getTodos(state),
 });
 
 const mapDispatchToProps = dispatch => ({

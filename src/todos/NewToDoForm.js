@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import { addTodoRequest } from './thunks';
 import {connect} from 'react-redux' //connect is a higher order function -> 2 diff sets of arguments : connect()(componentToConnectToReduxStore)
+import { getTodos, getTodosLoading } from './selectors';
 import "./NewToDoForm.css"
 
 const NewToDoForm = ({todos, onCreatePressed}) => {
@@ -32,7 +33,7 @@ const NewToDoForm = ({todos, onCreatePressed}) => {
 }
 
 const mapStateToProps = state => ({
-    todos: state.todos,
+    todos: getTodos(state),
 });
 
 const mapDispatchToProps = dispatch => ({
