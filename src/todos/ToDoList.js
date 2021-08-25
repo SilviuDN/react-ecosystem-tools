@@ -4,11 +4,16 @@ import { completedTodo} from './actions'
 import {displayAlert} from './thunks'
 import { loadTodos, removeTodoRequest, markTodoAsCompletedRequest } from './thunks';
 import ToDoListItem from './ToDoListItem'
-import { getTodos, getTodosLoading } from './selectors';
+import { 
+    getTodos, 
+    getTodosLoading,
+    getCompletedTodos,
+    getIncompleteTodos,
+ } from './selectors';
 import NewToDoForm from './NewToDoForm'
 import "./ToDoList.css"
 
-const ToDoList = ({ todos = [], onRemovePressed, onCompletePressed, isLoading, startLoadingTodos }) => {
+const ToDoList = ({ completedTodos, incompleteTodos, onRemovePressed, onCompletePressed, isLoading, startLoadingTodos }) => {
     useEffect(() => {
         startLoadingTodos();
     }, []);
@@ -17,11 +22,18 @@ const ToDoList = ({ todos = [], onRemovePressed, onCompletePressed, isLoading, s
     const content = (
         <div className="list-wrapper">
             <NewToDoForm />
-            {todos.map(todo => <ToDoListItem
+            <h3>Incomplete:</h3>
+            {incompleteTodos.map(todo => <ToDoListItem
+                todo={todo}
+                onRemovePressed={onRemovePressed}
+                onCompletePressed={onCompletePressed}/>)}
+            <h3>Completed:</h3>
+            {completedTodos.map(todo => <ToDoListItem
                 todo={todo}
                 onRemovePressed={onRemovePressed}
                 onCompletePressed={onCompletePressed}/>)}
         </div>
+
     );
     return isLoading ? loadingMessage : content;
 };
@@ -39,7 +51,8 @@ const ToDoList = ({ todos = [], onRemovePressed, onCompletePressed, isLoading, s
 
 const mapStateToProps = state => ({
     isLoading: getTodosLoading(state),
-    todos: getTodos(state),
+    completedTodos: getCompletedTodos(state),
+    incompleteTodos: getIncompleteTodos(state),
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -49,3 +62,9 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ToDoList) 
+
+            {/* {todos.map(todo => <ToDoListItem
+                todo={todo}
+                onRemovePressed={onRemovePressed}
+                onCompletePressed={onCompletePressed}/>)}
+        </div> */}
